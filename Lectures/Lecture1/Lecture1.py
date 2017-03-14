@@ -29,6 +29,9 @@ def greedy(items, max_cost, keyFunction):
 
 
 class Food(object):
+    '''''''''
+    used for describing different kinds of food
+    '''''''''
     def __init__(self, n, v, w):
         self.name = n
         self.value = v
