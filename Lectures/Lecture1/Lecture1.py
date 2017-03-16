@@ -8,6 +8,7 @@ def buildMenu(names, values, calories):
         menu.append(Food(names[i], values[i], calories[i]))
     return menu
 
+
 def greedy(items, max_cost, keyFunction):
     '''''''''
     takes: items - list
@@ -26,6 +27,21 @@ def greedy(items, max_cost, keyFunction):
             total_value += items_copy[i].getValue()
 
     return (result, total_value)
+
+def testGreedy(items, constrains, keyFunction):
+    taken, val = greedy(items, constrains, keyFunction)
+    print("Total value of items taken is", val)
+    for item in taken:
+        print(' ', item)
+
+
+def testGreedys(maxUnits):
+    '''''''''
+    This function is defined to test greedy func
+    '''''''''
+    print("Use greedy by value to allocate", maxUnits, "calories")
+    testGreedy(foods, )
+
 
 
 class Food(object):
