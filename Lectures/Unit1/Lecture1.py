@@ -5,7 +5,7 @@ def buildMenu(names, values, calories):
     '''''''''
     menu = []
     for idx in range(len(values)):
-        menu.append(Food(names[i], values[i], calories[i]))
+        menu.append(Food(names[idx], values[idx], calories[idx]))
     return menu
 
 
@@ -35,13 +35,16 @@ def testGreedy(items, constrains, keyFunction):
         print(' ', item)
 
 
-def testGreedys(maxUnits):
+def testGreedys(foods, maxUnits):
     '''''''''
     This function is defined to test greedy func
     '''''''''
     print("Use greedy by value to allocate", maxUnits, "calories")
-    testGreedy(foods, )
-
+    testGreedy(foods, maxUnits, Food.getValue)
+    print('\nUse greedy by cost to allocate', maxUnits, 'calories')
+    testGreedy(foods, maxUnits, lambda x: 1/Food.getCost(x))
+    print('\nUse greedy by density to allocate', maxUnits, 'calories')
+    testGreedy(foods, maxUnits, Food.getDensity)
 
 
 class Food(object):
@@ -64,3 +67,11 @@ class Food(object):
 
     def __str__(self):
         return self.name + ": <" + str(self.getValue()) + ", " + str(self.getCost()) + ">"
+
+names = ['wine', 'beer', 'pizza', 'burger', 'fries', 'cola', 'apple', 'donut', 'cake']
+values = [89, 90, 95, 100, 90, 79, 50, 10]
+calories = [123, 154, 258, 354, 365, 150, 95, 195]
+food = buildMenu(names, values, calories)
+
+#Uncomment this to test Lecture1 result
+testGreedys(food, 800)
