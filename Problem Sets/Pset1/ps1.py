@@ -53,6 +53,12 @@ class Cow(object):
     def __repr__(self):
         return self.getName() + ": " + str(self.getWeight())
 
+    def __add__(self, other):
+        return self.getWeight() + other.getWeight()
+
+    def __radd__(self, other):
+        return other + self.getWeight()
+
 
 def countCows(cow_dict, returnSorted = True):
     if returnSorted:
@@ -122,11 +128,32 @@ def brute_force_cow_transport(cows,limit=10):
     trips
     """
     cow_list = countCows(cows, False)
+    previous_amount_of_routes = -1
+    result = []
     for item in sorted(get_partitions(cow_list), key=len):
+        isFit = True
+        if len(item) != previous_amount_of_routes:
+            if len(result) == 0:
+                previous_amount_of_routes = len(item)
+        for trip in item:
+            if sum(trip) > limit:
+                isFit = False
+                break
+        if isFit:
+            result.append(item)
+    #formalization for export
+    to_return = []
+    for element in result[0]:
+        temp_list = []
+        for cow in element:
+            temp_list.append(cow.getName())
+        to_return.append(temp_list)
+    return to_return
 
-        
+
+
 # Problem 3
-def compare_cow_transport_algorithms():
+def compare_cow_transport_algorithms(cows, limit):
     """
     Using the data from ps1_cow_data.txt and the specified weight limit, run your
     greedy_cow_transport and brute_force_cow_transport functions here. Use the
@@ -139,8 +166,15 @@ def compare_cow_transport_algorithms():
     Returns:
     Does not return anything.
     """
-    # TODO: Your code here
-    pass
+    start = time.time()
+    greedy_cow_transport(cows, limit)
+    end = time.time()
+    print("Greedy", end - start)
+
+    start = time.time()
+    brute_force_cow_transport(cows, limit)
+    end = time.time()
+    print("Brute force", end - start)
 
 
 """
@@ -148,12 +182,19 @@ Here is some test data for you to see the results of your algorithms with.
 Do not submit this along with any of your answers. Uncomment the last two
 lines to print the result of your problem.
 """
+# cow1 = Cow("a", 1)
+# cow2 = Cow('b', 2)
+# cow3 = Cow('c', 3)
+# a = [cow1, cow2]
+# print(sum(a))
+
 
 cows = load_cows("ps1_cow_data.txt")
 limit=10
-print(cows)
+compare_cow_transport_algorithms(cows, limit)
 
-print(greedy_cow_transport(cows, limit))
-print(brute_force_cow_transport(cows, limit))
+
+
+
 
 

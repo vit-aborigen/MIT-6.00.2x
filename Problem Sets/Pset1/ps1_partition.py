@@ -21,5 +21,5 @@ def get_partitions(set_):
 ### Uncomment the following code  and run this file
 ### to see what get_partitions does if you want to visualize it:
 
-for item in sorted(get_partitions(['a','b','c','d', 'e', 'f']), key=len):
-    print(item)
+# for item in sorted(get_partitions(['a','b','c','d', 'e', 'f']), key=len):
+#     print(item)
