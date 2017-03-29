@@ -1,29 +1,13 @@
-cows = {"Jesse": 6, "Maybel": 3, "Callie": 2, "Maggie": 5}
-limit = 10
+import itertools
 
-def max_weight_cow(cow_list:dict):
-    '''''''''
-    assumes cow_list is not empty
-    return name of max weight cow
-    '''''''''
-    value = max(cow_list.values())
-    return [name for name,weight in cow_list.items() if weight == value][0]
+def bruteCowSearch(cow_list):
+    for i in range(len(cow_list), -1, -1):
+        result = []
+        for subset in itertools.combinations(cow_list, i):
+            diff = set(cow_list) - set(subset)
+            result.append(list(subset))
+            result.append(list(diff))
+        print(result)
+    return result
 
-
-def pick_cow(cow_list:dict):
-    cow_name = max_weight_cow(cow_list)
-    cow_weight = cow_list[cow_name]
-    del(cow_list[cow_name])
-    return (cow_name, cow_weight)
-
-def move_cows(cow_list: dict, weight):
-    result = []
-    cows_left = cow_list.copy()
-    while len(cows_left) != 0:
-        race = []
-        weight = 0
-        while weight <= limit:
-            race.append(pick_cow(cows_left)[0])
-            weight += pick_cow(cows_left)[1]
-
-print(move_cows(cows, limit))
+bruteCowSearch([1,2,3,4,5,6])
