@@ -54,9 +54,9 @@ def playRoulette(game, numSpins, toPrint = True):
               str(100*totPocket/numSpins) + '%\n')
     return (totRed/numSpins, totBlack/numSpins, totPocket/numSpins)
 
-#numSpins = 10000000
-#game = FairRoulette()
-#playRoulette(game, numSpins)
+numSpins = 10000000
+game = FairRoulette()
+playRoulette(game, numSpins)
 
 class EuRoulette(FairRoulette):
     def __init__(self):
@@ -103,23 +103,23 @@ def getMeanAndStd(X):
     std = (tot/len(X))**0.5
     return mean, std
 
-#random.seed(0)
-#numTrials = 20
-#resultDict = {}
-#games = (FairRoulette, EuRoulette, AmRoulette)
-#for G in games:
-#    resultDict[G().__str__()] = []
-#for numSpins in (100, 1000, 10000):
-#    print('\nSimulate betting a pocket for', numTrials,
-#          'trials of', numSpins, 'spins each')
-#    for G in games:
-#        pocketReturns = findPocketReturn(G(), 20, numSpins, False)
-#        mean, std = getMeanAndStd(pocketReturns)
-#        resultDict[G().__str__()].append((numSpins,
-#                                          100*mean, 100*std))
-#        print('Exp. return for', G(), '=', str(round(100*mean, 3))
-#              + '%,', '+/- ' + str(round(100*1.96*std, 3))
-#              + '% with 95% confidence')
+random.seed(0)
+numTrials = 20
+resultDict = {}
+games = (FairRoulette, EuRoulette, AmRoulette)
+for G in games:
+   resultDict[G().__str__()] = []
+for numSpins in (100, 1000, 10000):
+   print('\nSimulate betting a pocket for', numTrials,
+         'trials of', numSpins, 'spins each')
+   for G in games:
+       pocketReturns = findPocketReturn(G(), 20, numSpins, False)
+       mean, std = getMeanAndStd(pocketReturns)
+       resultDict[G().__str__()].append((numSpins,
+                                         100*mean, 100*std))
+       print('Exp. return for', G(), '=', str(round(100*mean, 3))
+             + '%,', '+/- ' + str(round(100*1.96*std, 3))
+             + '% with 95% confidence')
               
 
 def plotReturn(resultDict):
@@ -138,8 +138,8 @@ def plotReturn(resultDict):
     minX, maxX = pylab.xlim()
     pylab.xlim(1, maxX + 100000)
 #    
-#plotReturn(resultDict)
-#assert False
+plotReturn(resultDict)
+assert False
 
 def plotMeans(numDice, numRolls, numBins, legend, color, style):
     means = []
@@ -153,14 +153,14 @@ def plotMeans(numDice, numRolls, numBins, legend, color, style):
                hatch = style)
     return getMeanAndStd(means)
  
-#mean, std = plotMeans(1, 100000, 11, '1 die', 'b', '*')
-#print('Mean of rolling 1 die =', mean, 'Std =', std)
-#mean, std = plotMeans(50, 100000, 11, 'Mean of 50 dice', 'r', '//')
-#print('Mean of rolling 50 dice =', mean, 'Std =', std)
-#pylab.title('Rolling Continuous Dice')
-#pylab.xlabel('Value')
-#pylab.ylabel('Probability')
-#pylab.legend()
+mean, std = plotMeans(1, 100000, 11, '1 die', 'b', '*')
+print('Mean of rolling 1 die =', mean, 'Std =', std)
+mean, std = plotMeans(50, 100000, 11, 'Mean of 50 dice', 'r', '//')
+print('Mean of rolling 50 dice =', mean, 'Std =', std)
+pylab.title('Rolling Continuous Dice')
+pylab.xlabel('Value')
+pylab.ylabel('Probability')
+pylab.legend()
 
 
 def leaveAhead(game, stake, bet, numTrials):
@@ -179,16 +179,16 @@ def leaveAhead(game, stake, bet, numTrials):
             numAhead += 1
     return numAhead/numTrials
 
-#stake = 1
-#bet = 1
-#numTrials = 100000
-#successProb, stakes = [], []
-#for i in range(10):
-#    stakes.append(10**i)
-#    successProb.append(leaveAhead(AmRoulette(), 10**i, bet, numTrials))
-#pylab.plot(stakes, successProb)
-#pylab.xlabel('Bankroll')
-#pylab.ylabel('Probability of Winning')
-#pylab.semilogx()
-#pylab.show()
+stake = 1
+bet = 1
+numTrials = 100000
+successProb, stakes = [], []
+for i in range(10):
+   stakes.append(10**i)
+   successProb.append(leaveAhead(AmRoulette(), 10**i, bet, numTrials))
+pylab.plot(stakes, successProb)
+pylab.xlabel('Bankroll')
+pylab.ylabel('Probability of Winning')
+pylab.semilogx()
+pylab.show()
 
