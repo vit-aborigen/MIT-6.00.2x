@@ -38,14 +38,17 @@ meanOfMeans, stdOfMeans = [], []
 sampleSizes = range(10, 500, 50)
 
 def clt():
+    """ Flips a coin to generate a sample. 
+        Modifies meanOfMeans and stdOfMeans defined before the function
+        to get the means and stddevs based on the sample means. 
+        Does not return anything """
     for sampleSize in sampleSizes:
         sampleMeans = []
         for t in range(20):
             sample = flipCoin(sampleSize)
             sampleMeans.append(getMeanAndStd(sample)[0])
-        ## FILL IN TWO LINES
-        ## WHAT TO DO WITH THE SAMPLE MEANS?
-
+        meanOfMeans.append(getMeanAndStd(sampleMeans)[0])
+        stdOfMeans.append(getMeanAndStd(sampleMeans)[1])
 clt()
 pylab.figure(1)
 pylab.errorbar(sampleSizes, meanOfMeans,
