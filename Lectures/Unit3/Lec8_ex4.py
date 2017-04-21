@@ -11,11 +11,10 @@ def noReplacementSimulation(numTrials):
     counter = 0
     for i in range(numTrials):
         bucket = [1, 1, 1, 0, 0, 0]
-        for idx in range(3):
-            bucket.pop(random.randint(0, len(bucket)-1))
-        if sum(bucket) in [0,3]:
+        three_balls = random.sample(bucket, 3)
+        if sum(three_balls) in [0,3]:
             counter += 1
     return counter/numTrials
 
-print(noReplacementSimulation(2000))
+print(noReplacementSimulation(20000))
 
