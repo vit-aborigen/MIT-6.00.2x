@@ -5,7 +5,7 @@ Created on Mon Sep 19 11:45:20 2016
 @author: johnguttag
 """
 
-import random, pylab, numpy
+import random, numpy, pylab
 
 #set line width
 pylab.rcParams['lines.linewidth'] = 4
@@ -51,6 +51,7 @@ def plotData(fileName):
     pylab.plot(xVals, yVals, 'bo',
                label = 'Measured displacements')
     labelPlot()
+    pylab.show()
     
 plotData('springData.txt')
 

@@ -146,7 +146,8 @@ def compareDists():
               'Sample SD vs Population SD',
               'Exponential population')
 
-compareDists()  
+compareDists()
+pylab.show()
 #
 #popSizes = (10000, 100000, 1000000)
 #sampleSizes = range(20, 600, 1)
