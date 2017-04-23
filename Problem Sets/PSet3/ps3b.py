@@ -323,12 +323,9 @@ class ResistantVirus(SimpleVirus):
 # virus1 = ResistantVirus(1.0, 0.8, drugs, 0.8)
 # virus1.reproduce(0.01, ['drug_1', 'drug_2'])
 
-virus = ResistantVirus(1.0, 0.0, {"drug1":True, "drug2":False}, 0.0)
-child = virus.reproduce(0, ["drug2"])
+# virus = ResistantVirus(1.0, 0.0, {"drug1":True, "drug2":False}, 0.0)
+# child = virus.reproduce(0, ["drug2"])
 
-
-
-            
 
 class TreatedPatient(Patient):
     """
@@ -348,7 +345,8 @@ class TreatedPatient(Patient):
         maxPop: The  maximum virus population for this patient (an integer)
         """
 
-        # TODO
+        Patient.__init__(self, viruses, maxPop)
+        self.drugs = []
 
 
     def addPrescription(self, newDrug):
@@ -362,7 +360,8 @@ class TreatedPatient(Patient):
         postcondition: The list of drugs being administered to a patient is updated
         """
 
-        # TODO
+        if newDrug not in self.drugs:
+            self.drugs.append(newDrug)
 
 
     def getPrescriptions(self):
@@ -373,7 +372,7 @@ class TreatedPatient(Patient):
         patient.
         """
 
-        # TODO
+        return self.drugs
 
 
     def getResistPop(self, drugResist):
@@ -387,8 +386,11 @@ class TreatedPatient(Patient):
         returns: The population of viruses (an integer) with resistances to all
         drugs in the drugResist list.
         """
-
-        # TODO
+        populationCount = 0
+        for virus in self.getViruses():
+            if all(virus.isResistantTo(drug) for drug in drugResist):
+                populationCount += 1
+        return populationCount
 
 
     def update(self):
@@ -411,10 +413,24 @@ class TreatedPatient(Patient):
         returns: The total virus population at the end of the update (an
         integer)
         """
+        temp_virus_list = [virus for virus in self.getViruses() if not virus.doesClear()]
+        self.viruses = []
+        populatonDensity = len(temp_virus_list)/float(self.getMaxPop())
+        for virus in temp_virus_list:
+            try:
+                self.viruses.append(virus)
+                self.viruses.append(virus.reproduce(populatonDensity, self.getPrescriptions()))
+            except NoChildException:
+                pass
+        return self.getTotalPop()
 
-        # TODO
 
 
+# virus = ResistantVirus(1.0, 0.0, {"drug1":True, "drug2":False}, 0.0)
+# patient = TreatedPatient([virus, virus], 0.5)
+# patient.addPrescription("drug1")
+# patient.getResistPop("drug1")
+# print(patient.update())
 
 #
 # PROBLEM 4
