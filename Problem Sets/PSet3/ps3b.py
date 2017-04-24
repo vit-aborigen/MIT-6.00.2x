@@ -435,8 +435,8 @@ class TreatedPatient(Patient):
 #
 # PROBLEM 4
 #
-def simulationWithDrug(numViruses, maxPop, maxBirthProb, clearProb, resistances,
-                       mutProb, numTrials):
+def simulationWithDrug(numViruses: int, maxPop: float, maxBirthProb: float, clearProb: float, resistances: dict,
+                       mutProb: float, numTrials: int) -> int:
     """
     Runs simulations and plots graphs for problem 5.
 
@@ -457,5 +457,31 @@ def simulationWithDrug(numViruses, maxPop, maxBirthProb, clearProb, resistances,
     numTrials: number of simulation runs to execute (an integer)
     
     """
+    timesteps = 300
+    result_without_treat = [[] for i in range(timesteps)]
+    result_with_treat = [[] for i in range(timesteps)]
 
-    # TODO
+    for i in range(numTrials):
+        viruses = [ResistantVirus(maxBirthProb, clearProb, resistances.copy(), mutProb) \
+                   for idx in range(numViruses)]
+        patient_zero = TreatedPatient(viruses, maxPop)
+        for i in range(timesteps):
+            if i == timesteps//2:
+                patient_zero.addPrescription('guttagonol')
+            result_without_treat[i].append(patient_zero.update())
+            result_with_treat[i].append(patient_zero.getResistPop(['guttagonol']))
+
+    resultsSummary_without_treat = [sum(element) / float(numTrials) for element in result_without_treat]
+    resultsSummary_with_treat = [sum(element) / float(numTrials) for element in result_with_treat]
+
+    pylab.plot(resultsSummary_without_treat, label="Total Virus Population")
+    pylab.plot(resultsSummary_with_treat, label="Resistant Virus Population")
+    pylab.title("Simulation With Drug")
+    pylab.xlabel("Time Steps")
+    pylab.ylabel("Average Virus Population")
+    pylab.legend()
+    pylab.show()
+
+simulationWithDrug(100, 1000, 0.1, 0.05, {'guttagonol':True}, 0.005, 100)
+
+
