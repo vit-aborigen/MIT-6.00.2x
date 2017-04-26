@@ -153,10 +153,11 @@ def r_squared(y, estimated):
     meanError = error / len(y)
     return 1 - (meanError / np.var(y))
 
-print(r_squared([32.0, 42.0, 31.3, 22.0, 33.0], [32.3, 42.1, 31.2, 22.1, 34.0]))
+# print(r_squared([32.0, 42.0, 31.3, 22.0, 33.0], [32.3, 42.1, 31.2, 22.1, 34.0]))
 
 # Problem 3
 def evaluate_models_on_training(x, y, models):
+
     """
     For each regression model, compute the R-square for this model with the
     standard error over slope of a linear regression line (only if the model is
@@ -185,12 +186,12 @@ def evaluate_models_on_training(x, y, models):
 raw_data = Climate('data.csv')
 
 # Problem 3
-# y = []
-# x = INTERVAL_1
-# for year in INTERVAL_1:
-#     y.append(raw_data.get_daily_temp('BOSTON', 1, 10, year))
-# models = generate_models(x, y, [1])
-# evaluate_models_on_training(x, y, models)
+y = []
+x = INTERVAL_1
+for year in INTERVAL_1:
+    y.append(raw_data.get_daily_temp('BOSTON', 1, 10, year))
+models = generate_models(x, y, [1])
+evaluate_models_on_training(x, y, models)
 
 
 # Problem 4: FILL IN MISSING CODE TO GENERATE y VALUES

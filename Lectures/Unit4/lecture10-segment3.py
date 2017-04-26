@@ -118,8 +118,6 @@ def fitData1(fileName):
 #      aveMeanSquareError(yVals, estYVals))
 
 def rSquared(observed, predicted):
-    print(type(observed), type(predicted))
-
     error = ((predicted - observed)**2).sum()
     meanError = error/len(observed)
     return 1 - (meanError/numpy.var(observed))

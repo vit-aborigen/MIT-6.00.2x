@@ -67,8 +67,9 @@ def fitData(fileName):
                label = 'Linear fit, k = '
                + str(round(1/a, 5)))
     pylab.legend(loc = 'best')
+    pylab.show()
     
-#fitData('springData.txt')
+fitData('springData.txt')
 
    
 def fitData1(fileName):
@@ -140,11 +141,12 @@ def testFits(models, degrees, xVals, yVals, title):
                    + ', R2 = ' + str(round(error, 5)))
     pylab.legend(loc = 'best')
     pylab.title(title)
+    pylab.show()
 
-#xVals, yVals = getData('mysteryData.txt')
-#degrees = (1, 2)
-#models = genFits(xVals, yVals, degrees)
-#testFits(models, degrees, xVals, yVals, 'Mystery Data')
+xVals, yVals = getData('mysteryData.txt')
+degrees = (1, 2)
+models = genFits(xVals, yVals, degrees)
+testFits(models, degrees, xVals, yVals, 'Mystery Data')
 
 #Compare higher-order fits
 #degrees = (2, 4, 8, 16)

@@ -100,8 +100,7 @@ def fitData(fileName):
     labelPlot()
     pylab.legend(loc = 'best')
     
-#fitData('springData.txt')
-random.seed(0)
+fitData('springData.txt')
 
 class tempDatum(object):
     def __init__(self, s):
