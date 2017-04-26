@@ -148,8 +148,12 @@ def r_squared(y, estimated):
     Returns:
         a float for the R-squared error term
     """
-    # TODO
-    pass
+    y = np.array(y)
+    error = ((estimated - y) ** 2).sum()
+    meanError = error / len(y)
+    return 1 - (meanError / np.var(y))
+
+print(r_squared([32.0, 42.0, 31.3, 22.0, 33.0], [32.3, 42.1, 31.2, 22.1, 34.0]))
 
 # Problem 3
 def evaluate_models_on_training(x, y, models):
@@ -179,7 +183,6 @@ def evaluate_models_on_training(x, y, models):
 
 ### Begining of program
 raw_data = Climate('data.csv')
-print(generate_models([1970, 1975],[5.5,6.6],[1, 2]))
 
 # Problem 3
 # y = []
@@ -191,9 +194,9 @@ print(generate_models([1970, 1975],[5.5,6.6],[1, 2]))
 
 
 # Problem 4: FILL IN MISSING CODE TO GENERATE y VALUES
-x1 = INTERVAL_1
-x2 = INTERVAL_2
-y = []
-# MISSING LINES
-models = generate_models(x, y, [1])    
-evaluate_models_on_training(x, y, models)
+# x1 = INTERVAL_1
+# x2 = INTERVAL_2
+# y = []
+# # MISSING LINES
+# models = generate_models(x, y, [1])
+# evaluate_models_on_training(x, y, models)
