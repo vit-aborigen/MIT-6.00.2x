@@ -178,8 +178,18 @@ def evaluate_models_on_training(x, y, models):
     Returns:
         None
     """
-    # TODO
-    pass
+    pylab.plot(x, y, 'o', label='Data')
+    for i in range(len(models)):
+        y_estimated = pylab.polyval(models[i], x)
+        error = r_squared(y, y_estimated)
+        pylab.plot(x, y_estimated,
+                   label = 'Fit of degree '\
+                   + '2'\
+                   + ', R2 = ' + str(round(error, 5)))
+    pylab.legend(loc = 'best')
+    pylab.title("Problem 3")
+    pylab.show()
+
 
 
 ### Begining of program
