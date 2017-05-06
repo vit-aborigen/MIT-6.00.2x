@@ -5,6 +5,9 @@ You have a bucket with 4 red balls and 4 green balls. You draw 3 balls out of th
 Answer the question in reduced fraction form - eg 1/5 instead of 2/10.
 
 Answer is 1/7
+
+
+Problem 3_2 is solved below
 '''''''''
 
 import random
