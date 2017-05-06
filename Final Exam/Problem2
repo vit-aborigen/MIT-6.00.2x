@@ -1,0 +1,46 @@
+Consider the following code:
+
+import random, pylab
+xVals = []
+yVals = []
+wVals = []
+for i in range(1000):
+    xVals.append(random.random())
+    yVals.append(random.random())
+    wVals.append(random.random())
+xVals = pylab.array(xVals)
+yVals = pylab.array(yVals)
+wVals = pylab.array(wVals)
+xVals = xVals + xVals
+zVals = xVals + yVals
+tVals = xVals + yVals + wVals
+For each of the following questions, select the best answer from the set of choices.
+
+
+Problem 2-1
+2/2 points (graded)
+The values in tVals are most closely: Distributed with a Gaussian distribution
+
+Problem 2-2
+2/2 points (graded)
+The values in xVals are most closely: Uniformly distributed correct
+
+Problem 2-3
+2/2 points (graded)
+pylab.plot(xVals, zVals) - graph5
+
+Problem 2-4
+2/2 points (graded)
+pylab.plot(xVals, yVals) - graph4
+
+Problem 2-5
+2/2 points (graded)
+pylab.plot(xVals, sorted(yVals)) - graph3
+
+Problem 2-6
+2/2 points (graded)
+pylab.plot(sorted(xVals), yVals) - graph2
+
+Problem 2-7
+2/2 points (graded)
+pylab.plot(sorted(xVals), sorted(yVals)) - graph1
