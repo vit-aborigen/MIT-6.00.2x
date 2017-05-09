@@ -90,9 +90,6 @@ def drawGraph(numSteps):
     pylab.legend()
     pylab.show()
 
-    # coeff = polyfit(range(len(rabbitPopulationOverTime)), rabbitPopulationOverTime, 2)
-    # plot(polyval(coeff, range(len(rabbitPopulationOverTime))))
-
     coeff_rabbits = pylab.polyfit(range(len(population_rabbits)), population_rabbits, 2)
     pylab.plot(pylab.polyval(coeff_rabbits, range(len(population_rabbits))), label='rabbits polyfit')
 
